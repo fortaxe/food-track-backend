@@ -8,7 +8,6 @@ import foodRoutes from "./routes/foodRoutes";
 import elevenlabsRoutes from "./routes/elevenlabsRoutes";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
 app.use(cors({
     origin: true, // Allow all origins for dev
@@ -30,13 +29,17 @@ app.use("/api", exampleRoutes);
 app.use("/api", foodRoutes);
 app.use("/api", elevenlabsRoutes);
 
-
-
-
 app.get("/", (req, res) => {
-    res.send("Food Track API is running with Express!");
+    res.send("Food Track API is running!");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel
+export default app;
