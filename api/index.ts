@@ -1,4 +1,4 @@
-import app from '../app';
+import app from '../app.js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
