@@ -1,0 +1,32 @@
+{
+  "name": "food-track-server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec bun index.ts",
+    "build": "bun run index.ts",
+    "start": "bun run index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "drizzle-kit": "^0.31.8",
+    "nodemon": "^3.1.11"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@11labs/client": "^0.2.0",
+    "better-auth": "^1.4.9",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.1",
+    "elevenlabs": "^1.59.0",
+    "express": "^5.2.1",
+    "nanoid": "3",
+    "postgres": "^3.4.7"
+  }
+}
