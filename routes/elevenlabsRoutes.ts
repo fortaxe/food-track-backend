@@ -1,8 +1,8 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
 import { ElevenLabsClient } from "elevenlabs";
-import { db } from "../db";
-import { foodLog } from "../db/schema";
+import { db } from "../db/index.js";
+import { foodLog } from "../db/schema.js";
 import { eq, desc, gte } from "drizzle-orm";
 import { nanoid } from "nanoid";
 

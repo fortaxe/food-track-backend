@@ -1,9 +1,9 @@
 
 import { Router } from "express";
 import { toNodeHandler } from "better-auth/node";
-import { auth } from "../auth";
-import { db } from "../db";
-import { user } from "../db/schema";
+import { auth } from "../auth.js";
+import { db } from "../db/index.js";
+import { user } from "../db/schema.js";
 import { eq } from "drizzle-orm";
 
 

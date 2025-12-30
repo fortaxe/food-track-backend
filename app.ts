@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import authRoutes from "./routes/authRoutes";
-import exampleRoutes from "./routes/exampleRoutes";
-import foodRoutes from "./routes/foodRoutes";
-import elevenlabsRoutes from "./routes/elevenlabsRoutes";
+import authRoutes from "./routes/authRoutes.js";
+import exampleRoutes from "./routes/exampleRoutes.js";
+import foodRoutes from "./routes/foodRoutes.js";
+import elevenlabsRoutes from "./routes/elevenlabsRoutes.js";
 
 const app = express();
 

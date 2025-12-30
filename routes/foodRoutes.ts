@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { db } from "../db";
-import { foodLog, chatMessage } from "../db/schema";
+import { db } from "../db/index.js";
+import { foodLog, chatMessage } from "../db/schema.js";
 import { eq, desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
