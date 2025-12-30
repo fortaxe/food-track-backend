@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec bun index.ts",
-    "build": "bun run index.ts",
-    "start": "bun run index.ts"
+    "start": "tsx index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -27,6 +26,7 @@
     "elevenlabs": "^1.59.0",
     "express": "^5.2.1",
     "nanoid": "3",
-    "postgres": "^3.4.7"
+    "postgres": "^3.4.7",
+    "tsx": "^4.21.0"
   }
 }

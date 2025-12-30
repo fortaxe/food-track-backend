@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "index.ts",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "index.ts"
+        }
+    ],
+    "env": {
+        "DATABASE_URL": "@database_url",
+        "BETTER_AUTH_SECRET": "@better_auth_secret",
+        "BETTER_AUTH_URL": "@better_auth_url",
+        "ELEVENLABS_API_KEY": "@elevenlabs_api_key",
+        "ELEVENLABS_AGENT_ID": "@elevenlabs_agent_id",
+        "ELEVENLABS_VOICE_ID": "@elevenlabs_voice_id"
+    }
+}
