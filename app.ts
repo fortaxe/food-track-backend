@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import authRoutes from "./routes/authRoutes.js";
+import simpleAuthRoutes from "./routes/simpleAuthRoutes.js";
 import exampleRoutes from "./routes/exampleRoutes.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import elevenlabsRoutes from "./routes/elevenlabsRoutes.js";
@@ -10,17 +10,7 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: (origin, callback) => {
-        const allowedOrigins = [
-            'http://localhost:3000',
-            'https://food-track-web.vercel.app', // Add your frontend URL here
-        ];
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(null, true); // Allow all for now
-        }
-    },
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
@@ -35,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api', authRoutes);
+app.use('/api', simpleAuthRoutes);
 app.use('/api', exampleRoutes);
 app.use('/api', foodRoutes);
 app.use('/api', elevenlabsRoutes);

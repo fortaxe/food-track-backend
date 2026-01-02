@@ -13,18 +13,21 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
     },
-    // socialProviders: {
-    //     google: {
-    //         clientId: process.env.GOOGLE_CLIENT_ID as string,
-    //         clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    //     },
-    // },
     session: {
         expiresIn: 60 * 60 * 24 * 365, // 1 year
         updateAge: 60 * 60 * 24 * 365, // 1 year
     },
-    trustedOrigins: ["http://localhost:3000"],
+    trustedOrigins: [
+        "http://localhost:3000",
+        "https://food-track-web.vercel.app",
+    ],
+    advanced: {
+        crossSubDomainCookies: {
+            enabled: false,
+        },
+    },
     plugins: [
         openAPI()
     ]
 });
+
