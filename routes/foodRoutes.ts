@@ -2,20 +2,48 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import { db } from "../db/index.js";
 import { foodLog, chatMessage } from "../db/schema.js";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and, gte, lte } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
 const router = Router();
 
-// Get food logs for a user
-router.get("/food-logs/:userId", async (req: Request, res: Response) => {
+// Get food logs for a user (optionally filtered by date)
+router.get("/food-logs", async (req: Request, res: Response) => {
     try {
-        const { userId } = req.params;
+        const { userId, date } = req.query;
+
+        console.log(userId, date, "userId and date")
+
+        if (!userId) {
+            return res.status(400).json({ error: "userId is required" });
+        }
+
+        let conditions = [eq(foodLog.userId, userId as string)];
+
+        // If date is provided, filter by that date (IST)
+        if (date) {
+            const istOffset = 5.5 * 60 * 60 * 1000;
+            const targetDate = new Date(date as string);
+
+            const startOfDay = new Date(targetDate);
+            startOfDay.setUTCHours(0, 0, 0, 0);
+            startOfDay.setTime(startOfDay.getTime() - istOffset);
+
+            const endOfDay = new Date(targetDate);
+            endOfDay.setUTCHours(23, 59, 59, 999);
+            endOfDay.setTime(endOfDay.getTime() - istOffset);
+
+            conditions.push(gte(foodLog.loggedAt, startOfDay));
+            conditions.push(lte(foodLog.loggedAt, endOfDay));
+        }
+
         const logs = await db
             .select()
             .from(foodLog)
-            .where(eq(foodLog.userId, userId as string))
+            .where(and(...conditions))
             .orderBy(desc(foodLog.loggedAt));
+
+        console.log(logs, "logs of food")
 
         res.json(logs);
     } catch (error) {

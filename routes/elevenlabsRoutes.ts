@@ -141,6 +141,12 @@ router.post("/elevenlabs/webhook", async (req: Request, res: Response) => {
         // Handle get_food_history
         const days = body.days;
         if (days !== undefined) {
+            const historyUserId = body.user_id;
+
+            if (!historyUserId) {
+                return res.status(400).json({ error: "No user ID found for history" });
+            }
+
             const numDays = parseInt(days) || 7;
 
             const daysAgo = new Date();
@@ -149,7 +155,12 @@ router.post("/elevenlabs/webhook", async (req: Request, res: Response) => {
             const logs = await db
                 .select()
                 .from(foodLog)
-                .where(gte(foodLog.loggedAt, daysAgo))
+                .where(
+                    and(
+                        eq(foodLog.userId, historyUserId),
+                        gte(foodLog.loggedAt, daysAgo)
+                    )
+                )
                 .orderBy(desc(foodLog.loggedAt));
 
             // Format for AI to understand
